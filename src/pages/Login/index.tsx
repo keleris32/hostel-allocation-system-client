@@ -49,7 +49,6 @@ function Login(): JSX.Element {
           setIsErrorAlertActive={setIsErrorAlertActive}
           severity="error"
           variant="filled"
-          duration={6000}
           title="Could not login to your account"
           message={loginError}
         />

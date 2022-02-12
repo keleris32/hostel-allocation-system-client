@@ -9,7 +9,7 @@
 }
 
 * {
-  font-family: var(--font-one);
+  font-family: var(--font-two);
 }
 
 body {
@@ -28,7 +28,8 @@ code {
 }
 
 .auth-body {
-  position: fixed;
+  /* position: fixed; */
+  height: 100vh;
   left: 0;
   top: 0;
   right: 0;

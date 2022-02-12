@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../context/provider';
 import salemLogo from '../../assets/salemunilogo.png';
 import { ErrorAlert } from '../../components';
+import AnimatedPage from '../../components/AnimatedPage';
 
 interface FormPropTypes {
   matric_no: string;
@@ -53,63 +54,65 @@ function Login(): JSX.Element {
           message={loginError}
         />
       </div>
-      <div className="auth-form-con">
-        <div className="auth-app-logo">
-          <img src={salemLogo} alt="School logo" />
-        </div>
-        <Formik
-          initialValues={{ matric_no: '', password: '' }}
-          validateOnMount={true}
-          validationSchema={loginValidationSchema}
-          onSubmit={(values) => {
-            submitForm(values);
-          }}
-        >
-          {(props) => (
-            <form onSubmit={props.handleSubmit}>
-              <h2>Login</h2>
-              <input
-                type="text"
-                name="matric_no"
-                placeholder="Matric Number"
-                onChange={props.handleChange('matric_no')}
-                onBlur={props.handleBlur('matric_no')}
-                value={props.values.matric_no.trim()}
-              />
-              {props.errors.matric_no && props.touched.matric_no && (
-                <p className="auth-errors">{props.errors.matric_no}</p>
-              )}
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={props.handleChange('password')}
-                onBlur={props.handleBlur('password')}
-                value={props.values.password.trim()}
-              />
-              {props.errors.password && props.touched.password && (
-                <p className="auth-errors">{props.errors.password}</p>
-              )}
-              <button type="submit" disabled={loginLoading}>
-                {loginLoading ? (
-                  <CircularProgress style={{ color: '#fff' }} size={25} />
-                ) : (
-                  'Login to portal'
-                )}
-              </button>
-            </form>
-          )}
-        </Formik>
-        <span className="auth-form-link">
-          Don't have an account?{' '}
-          <span
-            className="auth-form-active-link"
-            onClick={navigateToRegisterPage}
+      <AnimatedPage>
+        <div className="auth-form-con">
+          <div className="auth-app-logo">
+            <img src={salemLogo} alt="School logo" />
+          </div>
+          <Formik
+            initialValues={{ matric_no: '', password: '' }}
+            validateOnMount={true}
+            validationSchema={loginValidationSchema}
+            onSubmit={(values) => {
+              submitForm(values);
+            }}
           >
-            Register here!
+            {(props) => (
+              <form onSubmit={props.handleSubmit}>
+                <h2>Login</h2>
+                <input
+                  type="text"
+                  name="matric_no"
+                  placeholder="Matric Number"
+                  onChange={props.handleChange('matric_no')}
+                  onBlur={props.handleBlur('matric_no')}
+                  value={props.values.matric_no.trim()}
+                />
+                {props.errors.matric_no && props.touched.matric_no && (
+                  <p className="auth-errors">{props.errors.matric_no}</p>
+                )}
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={props.handleChange('password')}
+                  onBlur={props.handleBlur('password')}
+                  value={props.values.password.trim()}
+                />
+                {props.errors.password && props.touched.password && (
+                  <p className="auth-errors">{props.errors.password}</p>
+                )}
+                <button type="submit" disabled={loginLoading}>
+                  {loginLoading ? (
+                    <CircularProgress style={{ color: '#fff' }} size={25} />
+                  ) : (
+                    'Login to portal'
+                  )}
+                </button>
+              </form>
+            )}
+          </Formik>
+          <span className="auth-form-link">
+            Don't have an account?{' '}
+            <span
+              className="auth-form-active-link"
+              onClick={navigateToRegisterPage}
+            >
+              Register here!
+            </span>
           </span>
-        </span>
-      </div>
+        </div>
+      </AnimatedPage>
     </div>
   );
 }

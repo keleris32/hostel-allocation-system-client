@@ -1,18 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import GlobalProvider from '../context/provider';
+import { AnimatePresence } from 'framer-motion';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
 import { Home, Login, Register } from '../pages';
 
 function AppRoutes() {
+  const location = useLocation();
+
   return (
-    <GlobalProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Router>
-    </GlobalProvider>
+    <AnimatePresence exitBeforeEnter>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </AnimatePresence>
   );
 }
 

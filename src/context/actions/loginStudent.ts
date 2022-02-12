@@ -13,7 +13,7 @@ interface FormPropTypes {
 // }
 
 export const loginStudent =
-  (loginData: FormPropTypes, isErrorAlertActive: any) =>
+  (loginData: FormPropTypes, setIsErrorAlertActive: any) =>
   async (dispatch: any) => {
     dispatch({
       type: authConstants.LOGIN_LOADING,
@@ -38,6 +38,6 @@ export const loginStudent =
           'Please check your internet connection and try again later!',
       });
 
-      isErrorAlertActive(true);
+      setIsErrorAlertActive(true);
     }
   };

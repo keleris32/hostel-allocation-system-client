@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import AppRoutes from './routes/Routes';
 import { setAccessToken } from './utils/accessToken';
 import axiosInstance from './utils/axiosInterceptor';
 
 function App() {
+  // const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   const fetchRefreshToken = async (): Promise<void> => {
@@ -11,9 +13,11 @@ function App() {
       const response = await axiosInstance.post('refresh-token');
 
       setAccessToken(response.data.acess_token);
-      setLoading(false);
     } catch (error) {
       console.log(error);
+      // navigate('login');
+    } finally {
+      setLoading(false);
     }
   };
 

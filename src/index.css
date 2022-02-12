@@ -1,5 +1,20 @@
+:root {
+  --bg-color: #addcf0;
+  --form-bg: #fff;
+  --btn-bg: #273285;
+  --input-bg: #eaeaea;
+  --footer-bg: #212327;
+  --font-one: 'Old Standard TT', serif;
+  --font-two: 'Montserrat', sans-serif;
+}
+
+* {
+  font-family: var(--font-one);
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +25,97 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.auth-body {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+.auth-form-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 0;
+  height: max-content;
+}
+
+.auth-app-logo {
+  margin: 1em 0;
+}
+
+.auth-app-logo > img {
+  width: auto;
+  height: 150px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 22.5em;
+  border-radius: 0.25em;
+  background-color: var(--form-bg);
+  padding: 1em 2em 2em;
+  margin: 1em 0;
+}
+
+form > h2 {
+  font-size: 1.75em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  color: var(--btn-bg);
+}
+
+form > input {
+  margin-top: 1em;
+  background-color: #f7f7f7;
+  border: 1px solid #dee5e7;
+  border-radius: 2px;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0.75em 1em;
+}
+
+form > input:focus {
+  outline-color: var(--btn-bg);
+}
+
+form > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--btn-bg);
+  color: #fff;
+  padding: 1em 0;
+  margin-top: 2em;
+  border: 1px solid var(--btn-bg);
+  border-radius: 2px;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-form-link {
+  color: #394499;
+  font-weight: bold;
+}
+
+.auth-form-active-link {
+  font-weight: bold;
+  color: #1a236d;
+  cursor: pointer;
+}
+
+.auth-errors {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: #f20012;
 }

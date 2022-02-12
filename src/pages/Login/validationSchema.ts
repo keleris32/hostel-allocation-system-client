@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const loginValidationSchema = yup.object().shape({
-  matricNumber: yup
+  matric_no: yup
     .string()
     .trim()
     .min(

@@ -1,25 +1,30 @@
+// import React from 'react';
 import { authConstants } from '../../enums/authEnums';
 import axiosInstance from '../../utils/axiosInterceptor';
 import { setAccessToken } from '../../utils/accessToken';
 
-interface PropTypes {
-  matricNumber: string;
+interface FormPropTypes {
+  matric_no: string;
   password: string;
 }
 
+// interface ErrorStateType {
+//   setErrorState: () => void;
+// }
+
 export const loginStudent =
-  ({ matricNumber: matric_no, password }: PropTypes) =>
+  (loginData: FormPropTypes, isErrorAlertActive: any) =>
   async (dispatch: any) => {
     dispatch({
       type: authConstants.LOGIN_LOADING,
     });
+
     try {
-      const response = await axiosInstance.post('auth/login', {
-        matric_no,
-        password,
-      });
+      const response = await axiosInstance.post('auth/login', loginData);
 
       setAccessToken(response.data.data.access_token);
+
+      console.log(JSON.stringify(response.data));
 
       dispatch({
         type: authConstants.LOGIN_SUCCESS,
@@ -28,7 +33,11 @@ export const loginStudent =
     } catch (error: any) {
       dispatch({
         type: authConstants.LOGIN_ERROR,
-        payload: error?.message,
+        payload:
+          error.response.data.message ??
+          'Please check your internet connection and try again later!',
       });
+
+      isErrorAlertActive(true);
     }
   };

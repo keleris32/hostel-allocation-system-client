@@ -37,7 +37,6 @@ code {
   display: flex;
   justify-content: center;
   background-color: var(--bg-color);
-  overflow: hidden;
 }
 
 .auth-form-con {
@@ -49,12 +48,12 @@ code {
 }
 
 .auth-app-logo {
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 
 .auth-app-logo > img {
   width: auto;
-  height: 150px;
+  height: 100px;
 }
 
 form {
@@ -65,6 +64,7 @@ form {
   background-color: var(--form-bg);
   padding: 1em 2em 2em;
   margin: 1em 0;
+  z-index: 6;
 }
 
 form > h2 {

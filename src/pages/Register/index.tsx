@@ -1,6 +1,4 @@
-import React from 'react';
-
-function Register(): React.ReactNode {
+function Register(): JSX.Element {
   return (
     <div>
       <h1>Helllooo Register</h1>

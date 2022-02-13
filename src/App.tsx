@@ -12,7 +12,9 @@ function App() {
     try {
       const response = await axiosInstance.post('refresh-token');
 
-      setAccessToken(response.data.acess_token);
+      if (response.data.access_token) {
+        setAccessToken(response.data.acess_token);
+      }
     } catch (error) {
       console.log(error);
       // navigate('login');

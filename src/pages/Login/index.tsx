@@ -20,27 +20,25 @@ function Login(): JSX.Element {
   const navigate = useNavigate();
   const token = getAccessToken();
 
-  if (token) {
-    navigate('/');
-  }
-
   const [isErrorAlertActive, setIsErrorAlertActive] = useState<boolean>(false);
   const {
     // @ts-ignore
     authDispatch,
     // @ts-ignore
-    authState: { loginLoading, isLoggedIn, loginError },
+    authState: { loginLoading, loginError },
   } = useContext(GlobalContext);
 
   const submitForm = (formData: FormPropTypes): void => {
-    loginStudent(formData, setIsErrorAlertActive)(authDispatch);
+    loginStudent(formData, setIsErrorAlertActive, navigate)(authDispatch);
   };
 
   const navigateToRegisterPage = (): void => navigate('/register');
 
   useEffect(() => {
-    isLoggedIn && navigate('/');
-  }, [isLoggedIn]);
+    if (token) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="auth-body">

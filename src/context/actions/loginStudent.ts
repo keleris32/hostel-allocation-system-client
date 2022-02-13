@@ -2,6 +2,8 @@
 import { authConstants } from '../../enums/authEnums';
 import axiosInstance from '../../utils/axiosInterceptor';
 import { setAccessToken } from '../../utils/accessToken';
+import { NavigateFunction } from 'react-router-dom';
+import { setStudent } from '../../utils/storageUtils';
 
 interface FormPropTypes {
   matric_no: string;
@@ -13,9 +15,13 @@ interface FormPropTypes {
 // }
 
 export const loginStudent =
-  (loginData: FormPropTypes, setIsErrorAlertActive: any) =>
+  (
+    loginData: FormPropTypes,
+    setIsErrorAlertActive: React.Dispatch<React.SetStateAction<boolean>>,
+    navigate: NavigateFunction
+  ) =>
   async (dispatch: any) => {
-    dispatch({
+    await dispatch({
       type: authConstants.LOGIN_LOADING,
     });
 
@@ -24,14 +30,16 @@ export const loginStudent =
 
       setAccessToken(response.data.data.access_token);
 
-      console.log(JSON.stringify(response.data));
+      setStudent(response.data.data.id);
 
-      dispatch({
+      await dispatch({
         type: authConstants.LOGIN_SUCCESS,
         payload: response.data.data,
       });
+
+      navigate('/');
     } catch (error: any) {
-      dispatch({
+      await dispatch({
         type: authConstants.LOGIN_ERROR,
         payload:
           error.response.data.message ??

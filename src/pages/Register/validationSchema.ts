@@ -4,8 +4,7 @@ export const registrationValidationSchema = yup.object().shape({
   name: yup
     .string()
     // .trim()
-    .matches(/^[A-Z-a-z ]*$/, 'Please enter a valid name')
-    .required('Name is required'),
+    .matches(/^[A-Z-a-z ]*$/, 'Please enter a valid name'),
 
   matric_no: yup
     .string()
@@ -17,11 +16,9 @@ export const registrationValidationSchema = yup.object().shape({
     .max(
       15,
       ({ max }) => `Matric Number must be at most ${max} characters long`
-    )
-    .required('Matric Number is required'),
+    ),
   password: yup
     .string()
     .trim()
-    .min(8, ({ min }) => `Password must be at least ${min} characters long`)
-    .required('Password is required'),
+    .min(8, ({ min }) => `Password must be at least ${min} characters long`),
 });

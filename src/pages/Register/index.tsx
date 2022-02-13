@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAccessToken } from '../../utils/accessToken';
 import { Formik } from 'formik';
@@ -25,10 +25,6 @@ function Register(): JSX.Element {
   const navigate = useNavigate();
   const token = getAccessToken();
 
-  if (token) {
-    navigate('/');
-  }
-
   const [isErrorAlertActive, setIsErrorAlertActive] = useState<boolean>(false);
   const [selectedLevelOption, setSelectedLevelOption] =
     useState<string>('Select your level');
@@ -40,7 +36,7 @@ function Register(): JSX.Element {
     // @ts-ignore
     authDispatch,
     // @ts-ignore
-    authState: { registerLoading, isLoggedIn, registerError },
+    authState: { registerLoading, registerError },
   } = useContext(GlobalContext);
 
   const submitForm = (formData: RegistrationFormTypes): void => {
@@ -49,25 +45,25 @@ function Register(): JSX.Element {
     formData.gender = selectedGenderOption;
 
     if (
-      selectedLevelOption ||
-      selectedCourseOption ||
-      selectedGenderOption === 'Select your level' ||
-      'Select your course' ||
-      'Select your gender'
+      selectedLevelOption !== 'Select your level' ||
+      selectedCourseOption !== 'Select your course' ||
+      selectedGenderOption !== 'Select your gender'
     ) {
-      registerStudent(formData, setIsErrorAlertActive)(authDispatch);
+      registerStudent(formData, setIsErrorAlertActive, navigate)(authDispatch);
     } else {
       alert('Please complete your the form before proceeding');
     }
   };
 
-  useEffect(() => {
-    isLoggedIn && navigate('/');
-  }, [isLoggedIn]);
-
   const navigateToLoginPage = (): void => {
     navigate('/login');
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="auth-body">
@@ -77,7 +73,7 @@ function Register(): JSX.Element {
           setIsErrorAlertActive={setIsErrorAlertActive}
           severity="error"
           variant="filled"
-          title="Could not login to your account"
+          title="Could not create account"
           message={registerError}
         />
       </div>
@@ -107,7 +103,7 @@ function Register(): JSX.Element {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Full Name"
                   onChange={props.handleChange('name')}
                   onBlur={props.handleBlur('name')}
                   value={props.values.name}

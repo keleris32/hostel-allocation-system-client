@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+.firstHalf,
+.secondHalf {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstHalf {
+  flex: 0.4;
+}
+
+.secondHalf {
+  flex: 0.6;
+}

@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.roomsWrapper {
+  width: 100%;
+  display: flex;
+  height: 100%;
+}
+
+.emailContainer {
+  margin-top: 2em;
+  width: 100%;
+  padding-left: 17.5em;
+}
+
+.emailContainer > input {
+  width: 300px;
+  background-color: #f7f7f7;
+  border: 1px solid #dee5e7;
+  border-radius: 2px;
+  font-size: 0.9em;
+  padding: 0em 0.5em;
+}
+
+.emailContainer > input:focus {
+  outline-color: var(--btn-bg);
+}
+
+.roomHalf {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--btn-bg);
+  color: #fff;
+  padding: 1em 0;
+  border: 1px solid var(--btn-bg);
+  border-radius: 2px;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+}

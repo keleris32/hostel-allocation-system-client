@@ -39,6 +39,8 @@ export const loginStudent =
 
       navigate('/');
     } catch (error: any) {
+      console.log('Error >', JSON.stringify(error, null, 2));
+      console.log('Error >>>', JSON.stringify(error.response, null, 2));
       await dispatch({
         type: authConstants.LOGIN_ERROR,
         payload:

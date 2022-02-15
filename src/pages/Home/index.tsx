@@ -3,11 +3,14 @@ import HomeCSS from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axiosInstance from '../../utils/axiosInterceptor';
-import { getAccessToken } from '../../utils/accessToken';
-import { ErrorAlert } from '../../components';
+import { getAccessToken, removeAccessToken } from '../../utils/accessToken';
+import { ErrorAlert, SkeletonUI } from '../../components';
 import salemLogo from '../../assets/salemunilogo.png';
 import PurchaseRoom from '../../components/PurchaseRoom';
 import StudentInfo from '../../components/StudentInfo';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { removeStudent } from '../../utils/storageUtils';
+import AnimatedPage from '../../components/AnimatedPage';
 
 function Home(): JSX.Element {
   const navigate = useNavigate();
@@ -58,6 +61,13 @@ function Home(): JSX.Element {
     }
   };
 
+  const logoutFn = () => {
+    removeStudent();
+    removeAccessToken();
+
+    navigate('/login');
+  };
+
   useEffect(() => {
     if (!token) {
       navigate('/login');
@@ -66,46 +76,55 @@ function Home(): JSX.Element {
     }
   }, []);
 
-  if (loading) {
-    return <div>Loadinggg Home!!!</div>;
-  }
-
   return (
-    <div className={HomeCSS.container}>
-      <div style={{ position: 'absolute' }}>
-        <ErrorAlert
-          isErrorAlertActive={isErrorAlertActive}
-          setIsErrorAlertActive={setIsErrorAlertActive}
-          severity="error"
-          variant="filled"
-          title="Could not fetch User Information"
-          message={fetchError}
-        />
-      </div>
-      <div className={HomeCSS.wrapper}>
-        <nav className={HomeCSS.header}>
-          <div className={HomeCSS.appLogo}>
-            <img src={salemLogo} alt="School logo" />
+    <AnimatedPage>
+      <div className={HomeCSS.container}>
+        <div style={{ position: 'absolute' }}>
+          <ErrorAlert
+            isErrorAlertActive={isErrorAlertActive}
+            setIsErrorAlertActive={setIsErrorAlertActive}
+            severity="error"
+            variant="filled"
+            title="Could not fetch User Information"
+            message={fetchError}
+          />
+        </div>
+        <div className={HomeCSS.wrapper}>
+          <nav className={HomeCSS.header}>
+            <div className={HomeCSS.navWrapper}>
+              <div className={HomeCSS.appLogo}>
+                <img src={salemLogo} alt="School logo" />
+              </div>
+              <div className={HomeCSS.logoutIcon} onClick={logoutFn}>
+                <LogoutIcon
+                  sx={{
+                    color: '#f20012',
+                    fontSize: '2.5em',
+                  }}
+                />
+              </div>
+            </div>
+          </nav>
+          <div className={HomeCSS.titleContainer}>
+            <h1>Welcome to the Hostel Allocation Portal</h1>
           </div>
-        </nav>
-        {studentData && console.log(studentData)}
-        <div className={HomeCSS.titleContainer}>
-          <h1>Welcome to the Hostel Allocation Portal</h1>
+          <div className={HomeCSS.contentContainer}>
+            {loading ? (
+              <SkeletonUI />
+            ) : studentData.room_id ? (
+              <StudentInfo data={studentData} />
+            ) : (
+              <PurchaseRoom data={roomsData} />
+            )}
+          </div>
+          <footer className={HomeCSS.footer}>
+            <h3>
+              © IGBINOSA JOSHUA - SU18201010T <br /> CLASS OF 2022
+            </h3>
+          </footer>
         </div>
-        <div className={HomeCSS.contentContainer}>
-          {studentData.room_id ? (
-            <StudentInfo data={studentData} />
-          ) : (
-            <PurchaseRoom data={roomsData} />
-          )}
-        </div>
-        <footer className={HomeCSS.footer}>
-          <h3>
-            © IGBINOSA JOSHUA - SU18201010T <br /> CLASS OF 2022
-          </h3>
-        </footer>
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
 

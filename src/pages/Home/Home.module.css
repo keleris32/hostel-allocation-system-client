@@ -14,14 +14,34 @@
 }
 
 .header {
-  width: 100%;
+  display: flex;
+  justify-content: center;
   padding: 0.5em 5em;
   background-color: var(--bg-color);
+  overflow-x: hidden;
+}
+
+.navWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .appLogo > img {
   width: auto;
   height: 85px;
+}
+
+.logoutIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 1em;
+  border-radius: 50%;
+  background-color: var(--input-bg);
 }
 
 .titleContainer {

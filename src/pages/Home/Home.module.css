@@ -1,0 +1,53 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  padding: 0.5em 5em;
+  background-color: var(--bg-color);
+}
+
+.appLogo > img {
+  width: auto;
+  height: 85px;
+}
+
+.titleContainer {
+  background-color: var(--input-bg);
+  color: var(--btn-bg);
+  padding: 0.5em 0;
+}
+
+.titleContainer > h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.contentContainer {
+  width: 1000px;
+  margin: 3em auto 0 auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em 0;
+  background-color: var(--btn-bg);
+  color: var(--input-bg);
+  text-align: center;
+  font-size: 0.8em;
+}

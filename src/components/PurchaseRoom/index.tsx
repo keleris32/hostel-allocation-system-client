@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import roomCSS from './PurchaseRoom.module.css';
 import NumberFormat from 'react-number-format';
 import { Radio, CircularProgress } from '@mui/material';
-import { getStudent } from '../../utils/storageUtils';
+import { getStudent, removeStudent } from '../../utils/storageUtils';
 import axiosInstance from '../../utils/axiosInterceptor';
 import { ErrorAlert } from '../index';
+import { removeAccessToken } from '../../utils/accessToken';
 
 function PurchaseRoom({ data }: any): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,6 +50,9 @@ function PurchaseRoom({ data }: any): JSX.Element {
         'create-payment-intent',
         formData
       );
+
+      removeStudent();
+      removeAccessToken();
 
       window.location.href = response.data.data.authorization_url;
     } catch (error) {

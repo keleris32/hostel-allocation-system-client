@@ -69,7 +69,7 @@ function PurchaseRoom({ data }: any): JSX.Element {
           setIsErrorAlertActive={setIsErrorAlertActive}
           severity="error"
           variant="filled"
-          title="Could not login to your account"
+          title="Could not process payment."
           message={fetchError}
         />
       </div>

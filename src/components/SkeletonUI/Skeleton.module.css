@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.container > div {
+  padding: 0 1em;
+  margin: 0 auto;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

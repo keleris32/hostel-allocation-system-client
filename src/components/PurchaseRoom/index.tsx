@@ -61,7 +61,6 @@ function PurchaseRoom({ data }: any): JSX.Element {
     }
   };
 
-  console.log('purchase', data);
   return (
     <div className={roomCSS.container}>
       <div style={{ position: 'absolute' }}>
